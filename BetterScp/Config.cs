@@ -16,13 +16,13 @@ namespace BetterScp
         [Description("The main Configuration for Scps")]
         public List<SerializedScpConfig> ScpConfigs = new List<SerializedScpConfig>
         {
-            new SerializedScpConfig((int)RoleType.Scp173,100f,25f,false,new List<SerializedItem>{new SerializedItem(6,0f,0,0,0,Vector3.one),new SerializedItem(30,18f,0,0,0,Vector3.one),}),
-            new SerializedScpConfig((int)RoleType.Scp049,100f,25f,false,new List<SerializedItem>{new SerializedItem(6,0f,0,0,0,Vector3.one),new SerializedItem(30,18f,0,0,0,Vector3.one),}),
-            new SerializedScpConfig((int)RoleType.Scp0492,75f,10f,false,new List<SerializedItem>{new SerializedItem(6,0f,0,0,0,Vector3.one),new SerializedItem(30,18f,0,0,0,Vector3.one),}),
-            new SerializedScpConfig((int)RoleType.Scp096,50f,25f,false,new List<SerializedItem>{new SerializedItem(6,0f,0,0,0,Vector3.one),new SerializedItem(30,18f,0,0,0,Vector3.one),}),
-            new SerializedScpConfig((int)RoleType.Scp106,25f,10f,false,new List<SerializedItem>{new SerializedItem(6,0f,0,0,0,Vector3.one),new SerializedItem(30,18f,0,0,0,Vector3.one),}),
-            new SerializedScpConfig((int)RoleType.Scp93953,100f,25f,false,new List<SerializedItem>{new SerializedItem(6,0f,0,0,0,Vector3.one),new SerializedItem(30,18f,0,0,0,Vector3.one),}),
-            new SerializedScpConfig((int)RoleType.Scp93989,100f,25f,false,new List<SerializedItem>{new SerializedItem(6,0f,0,0,0,Vector3.one),new SerializedItem(30,18f,0,0,0,Vector3.one),})
+            new SerializedScpConfig((int)RoleType.Scp173,100f,25f,false,new List<SerializedItem>()),
+            new SerializedScpConfig((int)RoleType.Scp049,100f,25f,false,new List<SerializedItem>()),
+            new SerializedScpConfig((int)RoleType.Scp0492,75f,10f,false,new List<SerializedItem>()),
+            new SerializedScpConfig((int)RoleType.Scp096,50f,25f,false,new List<SerializedItem>()),
+            new SerializedScpConfig((int)RoleType.Scp106,25f,10f,false,new List<SerializedItem>()),
+            new SerializedScpConfig((int)RoleType.Scp93953,100f,25f,false,new List<SerializedItem>()),
+            new SerializedScpConfig((int)RoleType.Scp93989,100f,25f,false,new List<SerializedItem>())
         };
     }
 
