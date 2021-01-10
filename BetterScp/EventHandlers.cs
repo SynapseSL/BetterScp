@@ -49,10 +49,14 @@ namespace BetterScp
                     var config = PluginClass.Config.ScpConfigs.FirstOrDefault(x => x.Id == player.RoleID);
                     if (config == null) continue;
 
-                    if (!config.Regenerateovermax && player.Health + config.TimeHp > player.MaxHealth)
-                        player.Health = player.MaxHealth;
-                    else
+                    if (config.TimeHp <= 0)
+                        player.Hurt((int)config.TimeHp * -1, DamageTypes.None, player);
+
+                    else if (config.Regenerateovermax)
                         player.Health += config.TimeHp;
+
+                    else
+                        player.Heal(config.TimeHp);
                 }
             }
         }
@@ -85,13 +89,17 @@ namespace BetterScp
             if(ev.Killer.RealTeam == Team.SCP && ev.Victim.RealTeam != Team.SCP)
             {
                 var config = PluginClass.Config.ScpConfigs.FirstOrDefault(x => x.Id == ev.Killer.RoleID);
-                if (config != null)
-                {
-                    if (!config.Regenerateovermax && ev.Killer.Health + config.Killhp > ev.Killer.MaxHealth)
-                        ev.Killer.Health = ev.Killer.MaxHealth;
-                    else
-                        ev.Killer.Health += config.Killhp;
-                }
+                if (config == null) return;
+
+
+                if (config.Killhp <= 0)
+                    ev.Killer.Hurt((int)config.Killhp * -1, DamageTypes.None, ev.Killer);
+
+                else if (config.Regenerateovermax)
+                    ev.Killer.Health += config.Killhp;
+
+                else
+                    ev.Killer.Heal(config.Killhp);
             }
         }
     }

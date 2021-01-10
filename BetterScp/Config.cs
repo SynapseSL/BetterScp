@@ -1,27 +1,25 @@
 ﻿using Synapse.Config;
 using System.Collections.Generic;
 using System.ComponentModel;
+using UnityEngine;
 
 namespace BetterScp
 {
     public class Config : AbstractConfigSection
     {
+        [Description("The time after which ScpSwap is no longer allowed")]
         public float SwapRequestTimeout = 30f;
 
+        [Description("If you can Swap to Scp's that currently does not exist")]
         public bool AllowNewScps = true;
 
+        [Description("Scp's that are not allowed to swap with Example:Zombie(10), Scp035(35)")]
         public List<int> BlackListedScps = new List<int> { (int)RoleType.Scp0492 };
 
         [Description("The main Configuration for Scps")]
         public List<SerializedScpConfig> ScpConfigs = new List<SerializedScpConfig>
         {
-            new SerializedScpConfig((int)RoleType.Scp173,100f,25f,false,new List<SerializedItem>()),
-            new SerializedScpConfig((int)RoleType.Scp049,100f,25f,false,new List<SerializedItem>()),
-            new SerializedScpConfig((int)RoleType.Scp0492,75f,10f,false,new List<SerializedItem>()),
-            new SerializedScpConfig((int)RoleType.Scp096,50f,25f,false,new List<SerializedItem>()),
-            new SerializedScpConfig((int)RoleType.Scp106,25f,10f,false,new List<SerializedItem>()),
-            new SerializedScpConfig((int)RoleType.Scp93953,100f,25f,false,new List<SerializedItem>()),
-            new SerializedScpConfig((int)RoleType.Scp93989,100f,25f,false,new List<SerializedItem>())
+            new SerializedScpConfig(-1, 100f, 25f, false, new List<SerializedItem>() { new SerializedItem((int)ItemType.KeycardZoneManager, 0, 0, 0, 0, Vector3.one) })
         };
     }
 
