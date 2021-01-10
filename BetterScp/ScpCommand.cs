@@ -12,7 +12,7 @@ namespace BetterScp
         Name = "scp",
         Aliases = new[] { "betterscp" },
         Description = "A Command for Scp's to swap Roles and see all Living Scp's",
-        Permission = "none",
+        Permission = "",
         Platforms = new[] { Platform.ClientConsole },
         Usage = "just use the Command with no parameter in order to get help"
         )]
@@ -61,6 +61,13 @@ namespace BetterScp
                         result.State = CommandResultState.Error;
                         return result;
                     }
+
+                    if (PluginClass.Config.BlackListedScps.Contains(context.Player.RoleID))
+                        return new CommandResult
+                        {
+                            State = CommandResultState.Error,
+                            Message = PluginClass.GetTranslation("blacklist")
+                        };
 
                     if (context.Arguments.Count < 2)
                         context.Arguments = new System.ArraySegment<string>(new[] { "","" });
@@ -134,7 +141,7 @@ namespace BetterScp
 
                             var roleid = valid[context.Arguments.ElementAt(1)];
 
-                            if(PluginClass.Config.BlackListedScps.Any(x => x == roleid))
+                            if(PluginClass.Config.BlackListedScps.Contains(roleid))
                             {
                                 result.Message = PluginClass.GetTranslation("blacklist");
                                 result.State = CommandResultState.Error;

@@ -1,7 +1,6 @@
 ﻿using Synapse.Config;
 using System.Collections.Generic;
 using System.ComponentModel;
-using UnityEngine;
 
 namespace BetterScp
 {
@@ -30,7 +29,10 @@ namespace BetterScp
     {
         public SerializedScpConfig() { }
 
-        public SerializedScpConfig(int id,float killhp,float timehp,bool regenerateovermax,List<SerializedItem> drops) { Id = id;Killhp = killhp; TimeHp = timehp;Regenerateovermax = regenerateovermax; Drops = drops; }
+        public SerializedScpConfig(int id, float killhp, float timehp, bool regenerateovermax, List<SerializedItem> drops, int health = -1) { Id = id; Killhp = killhp; TimeHp = timehp; Regenerateovermax = regenerateovermax; Drops = drops; Health = health; }
+
+        [Description("The Health with that they spawn with")]
+        public int Health;
 
         [Description("The Role ID of the Scp you want to setup")]
         public int Id;

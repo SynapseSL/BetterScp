@@ -7,11 +7,11 @@ namespace BetterScp
         Name = "BetterScp",
         Author = "Dimenzio",
         Description = "An Plugin which improves the Scps",
-        LoadPriority = int.MinValue,
+        LoadPriority = 0,
         SynapseMajor = 2,
-        SynapseMinor = 0,
-        SynapsePatch = 0,
-        Version = "v.1.0.0"
+        SynapseMinor = 4,
+        SynapsePatch = 2,
+        Version = "v.1.1.0"
         )]
     public class PluginClass : AbstractPlugin
     {

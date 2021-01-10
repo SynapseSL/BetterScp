@@ -22,7 +22,14 @@ namespace BetterScp
             Timing.CallDelayed(0.1f, () =>
              {
                  if (ev.Player.RealTeam == Team.SCP)
-                     ev.Player.GiveTextHint(PluginClass.GetTranslation("spawn"),7.5f);
+                 {
+                     ev.Player.GiveTextHint(PluginClass.GetTranslation("spawn"), 7.5f);
+
+                     var config = PluginClass.Config.ScpConfigs.FirstOrDefault(x => x.Id == ev.Player.RoleID);
+                     if (config == null || config.Health < 0) return;
+                     ev.Player.MaxHealth = config.Health;
+                     ev.Player.Health = config.Health;
+                 }
              });
         }
 
@@ -58,6 +65,8 @@ namespace BetterScp
 
         private void OnDeath(Synapse.Api.Events.SynapseEventArguments.PlayerDeathEventArgs ev)
         {
+            if (ev.Victim == null) return;
+
             if(ev.Victim.RealTeam == Team.SCP)
             {
                 var config = PluginClass.Config.ScpConfigs.FirstOrDefault(x => x.Id == ev.Victim.RoleID);
