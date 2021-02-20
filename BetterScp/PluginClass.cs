@@ -1,4 +1,5 @@
 ﻿using Synapse.Api.Plugin;
+using Synapse.Translation;
 using System.Collections.Generic;
 
 namespace BetterScp
@@ -9,49 +10,46 @@ namespace BetterScp
         Description = "An Plugin which improves the Scps",
         LoadPriority = 0,
         SynapseMajor = 2,
-        SynapseMinor = 4,
-        SynapsePatch = 2,
-        Version = "v.1.1.0"
+        SynapseMinor = 5,
+        SynapsePatch = 0,
+        Version = "v.1.1.1"
         )]
     public class PluginClass : AbstractPlugin
     {
-        private static PluginClass pclass;
+        [Config(section = "BetterScp")]
+        public static PluginConfig Config { get; set; }
 
-        [Synapse.Api.Plugin.Config(section = "BetterScp")]
-        public static Config Config;
+        [SynapseTranslation]
+        public static new SynapseTranslation<PluginTranslation> Translation { get; set; }
 
         public override void Load()
         {
-            pclass = this;
-
-            var trans = new Dictionary<string, string>
+            Translation.AddTranslation(new PluginTranslation());
+            Translation.AddTranslation(new PluginTranslation
             {
-                {"spawn","As Scp you can use the .scp command in the console to swap your class or see all living scp's" },
-                {"help","All Commands you can use as Scp:\nScp Swap {RoleID} - Swaps your current Scp Role\nScp List - Gives you a List of all Living Scp's" },
-                {"noscp", "You are not an Scp so you cant use this command!" },
-                {"gotrequest","<i>You have an SCP Swap request!\nCheck your console</i>" },
-                {"gotrequestconsole","You have received a swap request from %player% who is SCP-%id%. Would you like to swap with them? Type \".scp swap yes\" to accept or \".scp swap no\" to decline." },
-                {"norespond","The Player did not respong to your request" },
-                {"timeout","Your swap request has timed out" },
-                {"swapsucces","Swap succesful!" },
-                {"roundnotstarted","The round hasn't started yet!" },
-                {"expired", "SCP swap period has expired" },
-                {"noswap","You do not have a swap request." },
-                {"denied","Swap request denied" },
-                {"denied2",">our swap request has been denied" },
-                {"nothingtocancel","You do not have an outgoing swap request" },
-                {"canceled","Your swap request has been cancelled." },
-                {"blacklist","That SCP is blacklisted" },
-                {"already","You already have a request pending" },
-                {"sameswap",">ou cannot swap with your own role" },
-                {"swapsent","Swap request sent" },
-                {"noonetoswap","No players found to swap with" }
-            };
-            Translation.CreateTranslations(trans);
+                Spawn = "Als SCP kannst du den .scp Befehl benutzen in der ö-Konsole um deine Klasse zu wechseln",
+                Help = "Alle Befehle die du benutzen kannst:\\nScp Swap {RoleID} - Wechselt deine Klasse zu einem anderen SCP\\nScp List - Gibt dir eine Liste von allen am lebende SCPs",
+                NoSCP = "Da du kein SCP bist kannst du diesen Befehl auch nicht verwenden",
+                GotRequest = "<i>Du hast eine Tauschanfrage bekommen\\nÖffne deine Konsole mit ö zum auschecken</i>",
+                GotRequestConsole = "Du hast eine Anfrage bekommen von %player%, welcher SCP-%id% ist. Möchtest du mit ihm tauschen? Gib \".scp swap yes\" ein zum akzeptieren oder \".scp swap no\" zum ablehnen",
+                NoRespond = "Der Spieler hat nicht auf deine Anfrage reagiert",
+                Timeout = "Deine Anfrage ist abgelaufen",
+                SwapSuccess = "Erfolgreich getauscht!",
+                RoundNotStarted = "Die Runde hat noch nicht einmal angefangen!",
+                Expired = "Die Zeit zum tauschen ist abgelaufen",
+                NoSwap = "Du hast keine aktive Tauschanfrage",
+                Denied = "Tauschanfrage wurde abgelehnt",
+                Denied2 = "Deine Tauschanfrage wurde abgelehnt",
+                NothingToCancel = "Du hast keine Tauschanfrage gesendet",
+                Cancelled = "Deine Tauschanfrage wurde abgebrochen",
+                Blacklist = "Dieses SCP ist auf der Blacklist",
+                Already = "Du hast bereits eine Tauschanfrage gesendet",
+                SameSwap = "Du kannst nicht mit dir selber tauschen",
+                SwapSent = "Tauschanfrage wurde gesendet",
+                NoOneToSwap = "Es wurde kein Spieler gefunden um mit ihm zu tauschen"
+            },"GERMAN");
 
             new EventHandlers();
         }
-
-        public static string GetTranslation(string key) => pclass.Translation.GetTranslation(key);
     }
 }

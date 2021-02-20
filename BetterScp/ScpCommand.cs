@@ -24,7 +24,7 @@ namespace BetterScp
 
             if(context.Player.RealTeam != Team.SCP)
             {
-                result.Message = PluginClass.GetTranslation("noscp");
+                result.Message = PluginClass.Translation.ActiveTranslation.NoSCP;
                 result.State = CommandResultState.Error;
                 return result;
             }
@@ -40,8 +40,8 @@ namespace BetterScp
                     {
                         foreach (var role in Server.Get.RoleManager.CustomRoles)
                         {
+                            if (Server.Get.RoleManager.GetCustomRole(role.Value.Value).GetTeamID() != (int)Team.SCP) continue;
 
-                            if (Server.Get.RoleManager.GetCustomRole(role.Value.Value).GetTeam() != Team.SCP) continue;
                             valid.Add(role.Value.Key, role.Value.Value);
                             valid.Add(role.Value.Value.ToString(), role.Value.Value);
                         }
@@ -50,14 +50,14 @@ namespace BetterScp
 
                     if (!Server.Get.Map.Round.RoundIsActive)
                     {
-                        result.Message = PluginClass.GetTranslation("roundnotstarted");
+                        result.Message = PluginClass.Translation.ActiveTranslation.RoundNotStarted;
                         result.State = CommandResultState.Error;
                         return result;
                     }
 
                     if (!allowSwaps)
                     {
-                        result.Message = PluginClass.GetTranslation("expired");
+                        result.Message = PluginClass.Translation.ActiveTranslation.Expired;
                         result.State = CommandResultState.Error;
                         return result;
                     }
@@ -66,7 +66,7 @@ namespace BetterScp
                         return new CommandResult
                         {
                             State = CommandResultState.Error,
-                            Message = PluginClass.GetTranslation("blacklist")
+                            Message = PluginClass.Translation.ActiveTranslation.Blacklist
                         };
 
                     if (context.Arguments.Count < 2)
@@ -78,14 +78,14 @@ namespace BetterScp
                             var player = ongoingReqs.FirstOrDefault(x => x.Value == context.Player).Key;
                             if(player == null)
                             {
-                                result.Message = PluginClass.GetTranslation("noswap");
+                                result.Message = PluginClass.Translation.ActiveTranslation.NoSwap;
                                 result.State = CommandResultState.Error;
                                 return result;
                             }
 
                             PerformSwap(player, context.Player);
 
-                            result.Message = PluginClass.GetTranslation("swapsucces");
+                            result.Message = PluginClass.Translation.ActiveTranslation.SwapSuccess;
                             result.State = CommandResultState.Ok;
                             Timing.KillCoroutines(reqCoroutines[player]);
                             reqCoroutines.Remove(player);
@@ -95,13 +95,13 @@ namespace BetterScp
                             player = ongoingReqs.FirstOrDefault(x => x.Value == context.Player).Key;
                             if (player == null)
                             {
-                                result.Message = PluginClass.GetTranslation("noswap");
+                                result.Message = PluginClass.Translation.ActiveTranslation.NoSwap;
                                 result.State = CommandResultState.Error;
                                 return result;
                             }
 
-                            result.Message = PluginClass.GetTranslation("denied");
-                            player.SendConsoleMessage(PluginClass.GetTranslation("denied2"));
+                            result.Message = PluginClass.Translation.ActiveTranslation.Denied;
+                            player.SendConsoleMessage(PluginClass.Translation.ActiveTranslation.Denied2);
                             Timing.KillCoroutines(reqCoroutines[player]);
                             reqCoroutines.Remove(player);
                             ongoingReqs.Remove(player);
@@ -110,17 +110,17 @@ namespace BetterScp
                         case "CANCEL":
                             if (!ongoingReqs.ContainsKey(context.Player))
                             {
-                                result.Message = PluginClass.GetTranslation("nothingtocancel");
+                                result.Message = PluginClass.Translation.ActiveTranslation.NothingToCancel;
                                 result.State = CommandResultState.Error;
                                 return result;
                             }
 
                             var target = ongoingReqs[context.Player];
-                            target.SendConsoleMessage(PluginClass.GetTranslation("canceled"));
+                            target.SendConsoleMessage(PluginClass.Translation.ActiveTranslation.Cancelled);
                             Timing.KillCoroutines(reqCoroutines[context.Player]);
                             reqCoroutines.Remove(context.Player);
                             ongoingReqs.Remove(context.Player);
-                            result.Message = PluginClass.GetTranslation("canceled");
+                            result.Message = PluginClass.Translation.ActiveTranslation.Cancelled;
                             result.State = CommandResultState.Ok;
                             break;
 
@@ -134,7 +134,7 @@ namespace BetterScp
 
                             if (ongoingReqs.ContainsKey(context.Player))
                             {
-                                result.Message = PluginClass.GetTranslation("already");
+                                result.Message = PluginClass.Translation.ActiveTranslation.Already;
                                 result.State = CommandResultState.Error;
                                 break;
                             }
@@ -143,14 +143,14 @@ namespace BetterScp
 
                             if(PluginClass.Config.BlackListedScps.Contains(roleid))
                             {
-                                result.Message = PluginClass.GetTranslation("blacklist");
+                                result.Message = PluginClass.Translation.ActiveTranslation.Blacklist;
                                 result.State = CommandResultState.Error;
                                 break;
                             }
 
                             if(context.Player.RoleID == roleid)
                             {
-                                result.Message = PluginClass.GetTranslation("sameswap");
+                                result.Message = PluginClass.Translation.ActiveTranslation.SameSwap;
                                 result.State = CommandResultState.Error;
                                 break;
                             }
@@ -159,7 +159,7 @@ namespace BetterScp
                             if(player != null)
                             {
                                 reqCoroutines.Add(context.Player, Timing.RunCoroutine(SendRequest(context.Player, player)));
-                                result.Message = PluginClass.GetTranslation("swapsent");
+                                result.Message = PluginClass.Translation.ActiveTranslation.SwapSent;
                                 result.State = CommandResultState.Ok;
                                 break;
                             }
@@ -167,11 +167,11 @@ namespace BetterScp
                             if (PluginClass.Config.AllowNewScps)
                             {
                                 context.Player.RoleID = roleid;
-                                result.Message = PluginClass.GetTranslation("swapsucces");
+                                result.Message = PluginClass.Translation.ActiveTranslation.SwapSuccess;
                                 result.State = CommandResultState.Ok;
                                 break;
                             }
-                            result.Message = PluginClass.GetTranslation("noonetoswap");
+                            result.Message = PluginClass.Translation.ActiveTranslation.NoOneToSwap;
                             result.State = CommandResultState.Error;
                             break;
                     }
@@ -189,7 +189,7 @@ namespace BetterScp
                     break;
 
                 default:
-                    result.Message = PluginClass.GetTranslation("help");
+                    result.Message = PluginClass.Translation.ActiveTranslation.Help.Replace("\\n","\n");
                     result.State = CommandResultState.Ok;
                     break;
             }
@@ -199,7 +199,7 @@ namespace BetterScp
 
         internal static bool allowSwaps = false;
         private bool addedCustomScps = false;
-        private Dictionary<string, int> valid = new Dictionary<string, int>
+        private readonly Dictionary<string, int> valid = new Dictionary<string, int>
         {
             {"173", 0},
             {"peanut", 0},
@@ -217,13 +217,13 @@ namespace BetterScp
             {"zombie", 10}
         };
         internal static Dictionary<Player, CoroutineHandle> reqCoroutines = new Dictionary<Player, CoroutineHandle>();
-        private Dictionary<Player, Player> ongoingReqs = new Dictionary<Player, Player>();
+        private readonly Dictionary<Player, Player> ongoingReqs = new Dictionary<Player, Player>();
 
         private IEnumerator<float> SendRequest(Player player,Player target)
         {
             ongoingReqs.Add(player, target);
-            target.GiveTextHint(PluginClass.GetTranslation("gotrequest"));
-            target.SendConsoleMessage(PluginClass.GetTranslation("gotrequestconsole").Replace("%player%",player.NickName).Replace("%id%",player.RoleID.ToString()),"yellow");
+            target.GiveTextHint(PluginClass.Translation.ActiveTranslation.GotRequest.Replace("\\n","\n"));
+            target.SendConsoleMessage(PluginClass.Translation.ActiveTranslation.GotRequestConsole.Replace("%player%",player.NickName).Replace("%id%",player.RoleID.ToString()),"yellow");
             yield return Timing.WaitForSeconds(PluginClass.Config.SwapRequestTimeout);
             TimeoutRequest(player);
         }
@@ -235,8 +235,8 @@ namespace BetterScp
                 var target = ongoingReqs[player];
                 ongoingReqs.Remove(player);
 
-                player.SendConsoleMessage(PluginClass.GetTranslation("norespond"));
-                target.SendConsoleMessage(PluginClass.GetTranslation("timeout"));
+                player.SendConsoleMessage(PluginClass.Translation.ActiveTranslation.NoRespond);
+                target.SendConsoleMessage(PluginClass.Translation.ActiveTranslation.Timeout);
             }
         }
 

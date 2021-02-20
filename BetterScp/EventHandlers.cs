@@ -19,14 +19,15 @@ namespace BetterScp
 
         private void OnSetClass(Synapse.Api.Events.SynapseEventArguments.PlayerSetClassEventArgs ev)
         {
-            Timing.CallDelayed(0.1f, () =>
+            Timing.CallDelayed(0.2f, () =>
              {
                  if (ev.Player.RealTeam == Team.SCP)
                  {
-                     ev.Player.GiveTextHint(PluginClass.GetTranslation("spawn"), 7.5f);
+                     ev.Player.GiveTextHint(PluginClass.Translation.ActiveTranslation.Spawn, 7.5f);
 
                      var config = PluginClass.Config.ScpConfigs.FirstOrDefault(x => x.Id == ev.Player.RoleID);
                      if (config == null || config.Health < 0) return;
+
                      ev.Player.MaxHealth = config.Health;
                      ev.Player.Health = config.Health;
                  }
@@ -49,7 +50,7 @@ namespace BetterScp
                     var config = PluginClass.Config.ScpConfigs.FirstOrDefault(x => x.Id == player.RoleID);
                     if (config == null) continue;
 
-                    if (config.TimeHp <= 0)
+                    if (config.TimeHp < 0)
                         player.Hurt((int)config.TimeHp * -1, DamageTypes.None, player);
 
                     else if (config.Regenerateovermax)
@@ -92,7 +93,7 @@ namespace BetterScp
                 if (config == null) return;
 
 
-                if (config.Killhp <= 0)
+                if (config.Killhp < 0)
                     ev.Killer.Hurt((int)config.Killhp * -1, DamageTypes.None, ev.Killer);
 
                 else if (config.Regenerateovermax)

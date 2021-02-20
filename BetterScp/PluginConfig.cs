@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace BetterScp
 {
-    public class Config : AbstractConfigSection
+    public class PluginConfig : AbstractConfigSection
     {
         [Description("The time after which ScpSwap is no longer allowed")]
         public float SwapRequestTimeout = 30f;
