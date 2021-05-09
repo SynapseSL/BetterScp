@@ -10,9 +10,9 @@ namespace BetterScp
         Description = "An Plugin which improves the Scps",
         LoadPriority = 0,
         SynapseMajor = 2,
-        SynapseMinor = 5,
-        SynapsePatch = 0,
-        Version = "v.1.1.1"
+        SynapseMinor = 6,
+        SynapsePatch = 1,
+        Version = "v.1.1.2"
         )]
     public class PluginClass : AbstractPlugin
     {
