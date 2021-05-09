@@ -25,7 +25,7 @@ namespace BetterScp
                  {
                      ev.Player.GiveTextHint(PluginClass.Translation.ActiveTranslation.Spawn, 7.5f);
 
-                     var config = PluginClass.Config.ScpConfigs.FirstOrDefault(x => x.Id == ev.Player.RoleID);
+                     var config = PluginClass.Config.ScpConfigs?.FirstOrDefault(x => x.Id == ev.Player.RoleID);
                      if (config == null || config.Health < 0) return;
 
                      ev.Player.MaxHealth = config.Health;
@@ -47,7 +47,7 @@ namespace BetterScp
                 yield return Timing.WaitForSeconds(30f);
                 foreach(var player in Server.Get.GetPlayers(x => x.RealTeam == Team.SCP))
                 {
-                    var config = PluginClass.Config.ScpConfigs.FirstOrDefault(x => x.Id == player.RoleID);
+                    var config = PluginClass.Config.ScpConfigs?.FirstOrDefault(x => x.Id == player.RoleID);
                     if (config == null) continue;
 
                     if (config.TimeHp < 0)
@@ -74,7 +74,7 @@ namespace BetterScp
 
             if(ev.Victim.RealTeam == Team.SCP)
             {
-                var config = PluginClass.Config.ScpConfigs.FirstOrDefault(x => x.Id == ev.Victim.RoleID);
+                var config = PluginClass.Config.ScpConfigs?.FirstOrDefault(x => x.Id == ev.Victim.RoleID);
                 if (config == null) return;
 
                 foreach(var item in config.Drops)
@@ -89,7 +89,7 @@ namespace BetterScp
 
             if(ev.Killer.RealTeam == Team.SCP && ev.Victim.RealTeam != Team.SCP)
             {
-                var config = PluginClass.Config.ScpConfigs.FirstOrDefault(x => x.Id == ev.Killer.RoleID);
+                var config = PluginClass.Config.ScpConfigs?.FirstOrDefault(x => x.Id == ev.Killer.RoleID);
                 if (config == null) return;
 
 

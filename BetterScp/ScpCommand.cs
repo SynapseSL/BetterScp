@@ -40,10 +40,10 @@ namespace BetterScp
                     {
                         foreach (var role in Server.Get.RoleManager.CustomRoles)
                         {
-                            if (Server.Get.RoleManager.GetCustomRole(role.Value.Value).GetTeamID() != (int)Team.SCP) continue;
+                            if (Server.Get.RoleManager.GetCustomRole(role.ID).GetTeamID() != (int)Team.SCP) continue;
 
-                            valid.Add(role.Value.Key, role.Value.Value);
-                            valid.Add(role.Value.Value.ToString(), role.Value.Value);
+                            valid.Add(role.Name, role.ID);
+                            valid.Add(role.ID.ToString(), role.ID);
                         }
                         addedCustomScps = true;
                     }
