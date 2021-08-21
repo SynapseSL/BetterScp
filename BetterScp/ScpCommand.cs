@@ -11,7 +11,7 @@ namespace BetterScp
     [CommandInformation(
         Name = "scp",
         Aliases = new[] { "betterscp" },
-        Description = "A Command for Scp's to swap Roles and see all Living Scp's",
+        Description = "A command for SCP's to swap roles and see all living SCP's",
         Permission = "",
         Platforms = new[] { Platform.ClientConsole },
         Usage = "just use the Command with no parameter in order to get help"

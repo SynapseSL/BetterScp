@@ -1,6 +1,5 @@
 ﻿using Synapse.Api.Plugin;
 using Synapse.Translation;
-using System.Collections.Generic;
 
 namespace BetterScp
 {
@@ -12,7 +11,7 @@ namespace BetterScp
         SynapseMajor = 2,
         SynapseMinor = 6,
         SynapsePatch = 1,
-        Version = "v.1.1.2"
+        Version = "v.1.1.3"
         )]
     public class PluginClass : AbstractPlugin
     {

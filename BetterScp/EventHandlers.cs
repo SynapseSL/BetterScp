@@ -19,7 +19,7 @@ namespace BetterScp
 
         private void OnSetClass(Synapse.Api.Events.SynapseEventArguments.PlayerSetClassEventArgs ev)
         {
-            Timing.CallDelayed(0.2f, () =>
+            Timing.CallDelayed(0.5f, () =>
              {
                  if (ev.Player.RealTeam == Team.SCP)
                  {

@@ -19,7 +19,7 @@ namespace BetterScp
         [Description("The main Configuration for Scps")]
         public List<SerializedScpConfig> ScpConfigs = new List<SerializedScpConfig>
         {
-            new SerializedScpConfig(-1, 100f, 25f, false, new List<SerializedItem>() { new SerializedItem((int)ItemType.KeycardZoneManager, 0, 0, 0, 0, Vector3.one) })
+            new SerializedScpConfig(-1, 100f, 25f, false, new List<SerializedItem>() { new SerializedItem((int)ItemType.KeycardZoneManager, 0f, 0u, Vector3.one) })
         };
     }
 
