@@ -9,7 +9,7 @@ namespace BetterScp
         Description = "An Plugin which improves the Scps",
         LoadPriority = 0,
         SynapseMajor = 2,
-        SynapseMinor = 6,
+        SynapseMinor = 7,
         SynapsePatch = 1,
         Version = "v.1.1.3"
         )]

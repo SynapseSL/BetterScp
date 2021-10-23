@@ -14,7 +14,8 @@ namespace BetterScp
         Description = "A command for SCP's to swap roles and see all living SCP's",
         Permission = "",
         Platforms = new[] { Platform.ClientConsole },
-        Usage = "just use the Command with no parameter in order to get help"
+        Usage = "just use the Command with no parameter in order to get help",
+        Arguments = new[] { "List/Swap" }
         )]
     public class ScpCommand : ISynapseCommand
     {
