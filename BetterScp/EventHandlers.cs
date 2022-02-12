@@ -51,7 +51,7 @@ namespace BetterScp
                     if (config == null) continue;
 
                     if (config.TimeHp < 0)
-                        player.Hurt((int)config.TimeHp * -1, DamageTypes.None, player);
+                        player.Hurt((int)config.TimeHp * -1);
 
                     else if (config.Regenerateovermax)
                         player.Health += config.TimeHp;
@@ -94,7 +94,7 @@ namespace BetterScp
 
 
                 if (config.Killhp < 0)
-                    ev.Killer.Hurt((int)config.Killhp * -1, DamageTypes.None, ev.Killer);
+                    ev.Killer.Hurt((int)config.Killhp * -1);
 
                 else if (config.Regenerateovermax)
                     ev.Killer.Health += config.Killhp;
