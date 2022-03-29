@@ -77,11 +77,14 @@ namespace BetterScp
                 var config = PluginClass.Config.ScpConfigs?.FirstOrDefault(x => x.Id == ev.Victim.RoleID);
                 if (config == null) return;
 
-                foreach(var item in config.Drops)
+                if (config.Drops != null)
                 {
-                    var synapseitem = item.Parse();
-                    synapseitem.Position = ev.Victim.Position;
-                    synapseitem.Drop();
+                    foreach (var item in config.Drops)
+                    {
+                        var synapseitem = item.Parse();
+                        synapseitem.Position = ev.Victim.Position;
+                        synapseitem.Drop();
+                    }
                 }
             }
 
